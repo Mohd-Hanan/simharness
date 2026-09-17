@@ -8,7 +8,7 @@ display:
   fire_size: 1
   control_line_size: 3
   agent_size: 4
-  rescale_factor: 4
+  rescale_factor: 6
 
 simulation:
   update_rate: 1
@@ -19,25 +19,44 @@ simulation:
   draw_spread_graph: false
   data_type: "npy"
   # NOTE: Below path isn't used to save gifs; we specify `save_path` via `save_gif(path)`
-  sf_home: ${oc.env:SF_HOME}
+  sf_home: /home/hanan/Documents/rl_project/simfire
 
 mitigation:
   ros_attenuation: false
 
 operational:
   seed:
-  latitude: 36.09493 # top left corner
-  longitude: -120.52193 # top left corner
+  latitude: 38.422 # top left corner
+  longitude: -118.266 # top left corner
   height: ${operational_screen_size:${simulation.screen_height}}
   width: ${operational_screen_size:${simulation.screen_width}}
   resolution: 30
-  year: 2019
+  year: 2020
 
 terrain:
   topography:
-    type: operational
+    type: functional
+    functional:
+      function: perlin
+      perlin:
+        octaves: 3
+        persistence: 0.7
+        lacunarity: 2.0
+        seed: 827
+        range_min: 100.0
+        range_max: 2000.0
+      gaussian:
+        amplitude: 500
+        mu_x: 50
+        mu_y: 50
+        sigma_x: 50
+        sigma_y: 50
   fuel:
-    type: operational
+    type: functional
+    functional:
+      function: chaparral
+      chaparral:
+        seed: 1113
 
 fire:
   fire_initial_position:

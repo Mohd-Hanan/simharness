@@ -40,12 +40,8 @@ def validate_evaluation_config(algo_cfg: "AlgorithmConfig"):
     if eval_duration_unit != "episodes":
         msg = "The `evaluation_duration_unit` must be set to `episodes`."
         raise ValueError(msg)
-    # TODO: Handle `num_eval_workers == 0` edge case.
-    elif num_eval_workers == 0:
-        msg = "The `evaluation_num_workers` must be greater than 0."
-        raise ValueError(msg)
     # TODO: Handle `eval_duration` greater than `evaluation_num_workers` edge case.
-    elif eval_duration / num_eval_workers > 1:
+    elif num_eval_workers > 0 and eval_duration / num_eval_workers > 1:
         msg = "The `evaluation_duration` cannot be greater than `evaluation_num_workers`."
     # The logic gets weird if eval envs use a local worker; don't allow this for now.
     # TODO: Handle `use_eval_local_worker` edge case.

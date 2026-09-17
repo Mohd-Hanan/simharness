@@ -578,10 +578,6 @@ class FireHarness(Harness[AnyFireSimulation]):
         self.sim.reset()
 
         # Update the simulation's rendering attribute to match the provided value.
-        if should_render:
-            logger.info("Setting SDL_VIDEODRIVER environment variable to 'dummy'...")
-            os.environ["SDL_VIDEODRIVER"] = "dummy"
-
         self.sim.rendering = should_render
 
         # Indicate whether the environment's `FireSimulation` should be rendered.
